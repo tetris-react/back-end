@@ -11,7 +11,7 @@
 - Apollo Server Express
 - Bcrypt
 
-How to get running locally:
+## Local Startup Guide:
 
 ### Step 1:
 
