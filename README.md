@@ -1,4 +1,4 @@
-# React / Tetris User Authentication and Score Tracking Back End
+# React / Tetris User Auth and Score Tracking
 
 **Core TechStack:**
 
