@@ -21,7 +21,6 @@ You need to add a `.env` file with:
 DATABASE_URL=postgres://tetris_player:password@localhost:5432/tetris_be
 SECRET=lksdhglef23092382efhsdof9p8whedfauiwhdgi02088234t9w3efhsx
 REDIS_URL=6379
-PG_PORT=5432
 PORT=4000
 CORS_ORIGIN=http://localhost:3000
 ```
