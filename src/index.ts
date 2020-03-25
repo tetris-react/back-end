@@ -12,7 +12,11 @@ import cors from "cors";
 
 import { redis } from "./redis";
 
-const main = async () => {
+const app = Express();
+
+const RedisStore = connectRedis(session);
+
+const ormConnection = async () => {
   await createConnection({
     name: "default",
     type: "postgres",
@@ -24,6 +28,27 @@ const main = async () => {
       ssl: process.env.SSL || false,
     },
   });
+};
+
+const sessionOptions = {
+  store: new RedisStore({
+    client: redis as any,
+  }),
+  name: "qid",
+  secret: String(process.env.SECRET),
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+  },
+};
+
+const message = `Server running on http://localhost:${process.env.PORT}/graphql 🚀`;
+
+const main = async () => {
+  ormConnection();
 
   const schema = await buildSchema({
     resolvers: [__dirname + "/resolvers/**/*.ts"],
@@ -37,10 +62,6 @@ const main = async () => {
     context: ({ req, res }: any) => ({ req, res }),
   });
 
-  const app = Express();
-
-  const RedisStore = connectRedis(session);
-
   app.use(
     cors({
       credentials: true,
@@ -48,29 +69,12 @@ const main = async () => {
     })
   );
 
-  app.use(
-    session({
-      store: new RedisStore({
-        client: redis as any,
-      }),
-      name: "qid",
-      secret: String(process.env.SECRET),
-      resave: false,
-      saveUninitialized: false,
-      cookie: {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
-      },
-    })
-  );
+  app.use(session(sessionOptions));
 
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(process.env.PORT, () => {
-    console.log(
-      `Server running on http://localhost:${process.env.PORT}/graphql 🚀`
-    );
+    console.log(message);
   });
 };
 
