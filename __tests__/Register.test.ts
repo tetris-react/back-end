@@ -1,7 +1,7 @@
 import { Connection } from "typeorm";
 
-import { gCall } from "../test-utils/gCall";
-import { testConn } from "../test-utils/testConn";
+import { gCall } from "../__test-utils__/gCall";
+import { testConn } from "../__test-utils__/testConn";
 import { User } from "./../src/entity/User";
 
 import faker from "faker";
