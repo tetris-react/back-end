@@ -8,7 +8,7 @@ import {
 import { User } from "../../entity/User";
 
 @ValidatorConstraint({ async: true })
-export class IfFieldAlreadyExistConstraint
+export class IfUsernameAlreadyExistConstraint
   implements ValidatorConstraintInterface {
   async validate(username: string): Promise<boolean> {
     return User.findOne({ where: { username } }).then(user => {
@@ -18,14 +18,16 @@ export class IfFieldAlreadyExistConstraint
   }
 }
 
-export function DoesFieldAlreadyExist(validationOptions?: ValidationOptions) {
+export function DoesUsernameAlreadyExist(
+  validationOptions?: ValidationOptions
+) {
   return function(object: Object, propertyName: string) {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,
       options: validationOptions,
       constraints: [],
-      validator: IfFieldAlreadyExistConstraint,
+      validator: IfUsernameAlreadyExistConstraint,
     });
   };
 }
