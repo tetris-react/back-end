@@ -1,6 +1,10 @@
+# npm / yarn stuff
 node_modules/
 yarn.lock
 package-lock.json
+
+# hidden stuff
 .env
-# testing
+
+# testing stuff
 /coverage
