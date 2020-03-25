@@ -1,5 +1,9 @@
 # React / Tetris User Auth and Score Tracking
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/bfe3e2f66db2319dbb3d/maintainability)](https://codeclimate.com/github/tetris-react/back-end/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/bfe3e2f66db2319dbb3d/test_coverage)](https://codeclimate.com/github/tetris-react/back-end/test_coverage)
+
 **Core TechStack:**
 
 - TypeScript
