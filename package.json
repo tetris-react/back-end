@@ -10,9 +10,9 @@
   "scripts": {
     "start": "ts-node src/index.ts",
     "server": "ts-node-dev src/index.ts",
-    "db:setup": "ts-node ./test-utils/setup.ts",
-    "test": "npm run db:setup && jest",
-    "coverage": "jest --coverage --detectOpenHandles --forceExit || true"
+    "db:setup": "ts-node ./__test-utils__/setup.ts",
+    "test": "yarn db:setup && jest",
+    "coverage": "yarn test --coverage --detectOpenHandles --forceExit || true"
   },
   "jest": {
     "collectCoverageFrom": [
