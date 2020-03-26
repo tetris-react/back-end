@@ -1,8 +1,8 @@
 import "reflect-metadata";
 
-// Keep it hidden!
 require("dotenv").config();
 
+import { ExpressContext } from "./types/ExpressContext";
 import { ApolloServer } from "apollo-server-express";
 import Express from "express";
 import { createConnection } from "typeorm";
@@ -55,7 +55,7 @@ const main = async () => {
 
   const apolloServer = new ApolloServer({
     schema,
-    context: ({ req, res }: any) => ({ req, res }),
+    context: ({ req, res }: ExpressContext) => ({ req, res }),
   });
 
   app.use(
@@ -70,7 +70,7 @@ const main = async () => {
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(process.env.PORT, () => {
-    console.log(message);
+    setTimeout(() => console.log(message), 500);
   });
 };
 
