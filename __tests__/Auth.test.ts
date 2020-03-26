@@ -112,14 +112,17 @@ describe("User authentication flow 🌸", () => {
         userId: response?.data?.login.id,
       });
 
-      // console.log("LOGGED IN USER:", response?.data?.login);
-
-      // console.log("PROTECTED RESPONSE:", protectedResponse);
-
       expect(protectedResponse.data).toMatchObject({ hello: "Hello, world!" });
     }
   });
 
+  /* 
+    For some reason, this test doesn't pass.
+    It says ctx.req.session.destroy is not a function
+    But it is...
+    It works just fine, and I don't know to fix it yet
+    So for now it's a false positive until I can figure it out
+  */
   it("Logs a user out 💃", async () => {
     const dbUser = await User.findOne({
       where: {
@@ -136,9 +139,9 @@ describe("User authentication flow 🌸", () => {
       data: null,
     });
 
-    console.log("LOGOUT RESPONSE:", response);
+    // console.log("LOGOUT RESPONSE:", response);
 
-    console.log("USER ID:", dbUser?.id);
+    // console.log("USER ID:", dbUser?.id);
 
     expect(response.data).toBe(null);
   });
