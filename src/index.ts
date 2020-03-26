@@ -1,5 +1,6 @@
 import "reflect-metadata";
 
+// Keep it hidden!
 require("dotenv").config();
 
 import { ApolloServer } from "apollo-server-express";
