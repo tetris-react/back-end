@@ -22,3 +22,10 @@ CREATE DATABASE tetris_be
   ENCODING = 'UTF8'
   CONNECTION LIMIT = -1
 ;
+
+CREATE DATABASE tetris_test_be
+  WITH 
+  OWNER = tetris_player
+  ENCODING = 'UTF8'
+  CONNECTION LIMIT = -1
+;
