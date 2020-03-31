@@ -1,6 +1,6 @@
 import { logger } from "../../middleware";
 import bcrypt from "bcryptjs";
-import { ExpressContext } from "../../types/ExpressContext";
+import { ExpressContext } from "../../types";
 import { User } from "../../entity/User";
 import { LoginInput } from "../../inputs/LoginInput";
 import { Resolver, Mutation, Arg, Ctx, UseMiddleware } from "type-graphql";

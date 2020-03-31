@@ -12,7 +12,8 @@
     "server": "ts-node-dev src/index.ts",
     "db:setup": "ts-node ./__test-utils__/setup.ts",
     "test": "yarn db:setup && jest",
-    "coverage": "yarn test --coverage --detectOpenHandles --forceExit || true"
+    "coverage": "yarn test --coverage --detectOpenHandles --forceExit || true",
+    "remake": "psql -U postgres -a -f remakeDatabase.sql"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -42,6 +43,7 @@
     "express-session": "^1.17.0",
     "graphql": "^14.6.0",
     "ioredis": "^4.16.0",
+    "moment": "^2.24.0",
     "nodemailer": "^6.4.6",
     "pg": "^7.18.2",
     "reflect-metadata": "^0.1.13",

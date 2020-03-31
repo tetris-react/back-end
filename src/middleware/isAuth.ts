@@ -1,6 +1,6 @@
 import { MiddlewareFn } from "type-graphql";
 
-import { ExpressContext } from "../types/ExpressContext";
+import { ExpressContext } from "../types";
 
 export const isAuth: MiddlewareFn<ExpressContext> = async (
   { context },

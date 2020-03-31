@@ -3,8 +3,7 @@ import { Connection } from "typeorm";
 import { gCall } from "../__test-utils__/gCall";
 import { testConn } from "../__test-utils__/testConn";
 import { User } from "../src/entity/User";
-
-import faker from "faker";
+import { fakeUser } from "../__test-utils__/fakeObjects";
 
 let conn: Connection;
 beforeAll(async () => {
@@ -13,12 +12,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await conn.close();
 });
-
-const fakeUser = {
-  username: faker.internet.userName(),
-  email: faker.internet.email(),
-  password: faker.internet.password(),
-};
 
 const registerMutation = `
   mutation Register($data: RegisterInput!) {
@@ -59,6 +52,8 @@ describe("User authentication flow 🌸", () => {
         data: fakeUser,
       },
     });
+
+    console.log("REGISTER RESPONSE ***", response);
 
     expect(response).toMatchObject({
       data: {
@@ -112,14 +107,17 @@ describe("User authentication flow 🌸", () => {
         userId: response?.data?.login.id,
       });
 
-      // console.log("LOGGED IN USER:", response?.data?.login);
-
-      // console.log("PROTECTED RESPONSE:", protectedResponse);
-
       expect(protectedResponse.data).toMatchObject({ hello: "Hello, world!" });
     }
   });
 
+  /* 
+    For some reason, this test doesn't pass.
+    It says ctx.req.session.destroy is not a function
+    But it is...
+    It works just fine, and I don't know to fix it yet
+    So for now it's a false positive until I can figure it out
+  */
   it("Logs a user out 💃", async () => {
     const dbUser = await User.findOne({
       where: {
@@ -136,9 +134,9 @@ describe("User authentication flow 🌸", () => {
       data: null,
     });
 
-    console.log("LOGOUT RESPONSE:", response);
+    // console.log("LOGOUT RESPONSE:", response);
 
-    console.log("USER ID:", dbUser?.id);
+    // console.log("USER ID:", dbUser?.id);
 
     expect(response.data).toBe(null);
   });

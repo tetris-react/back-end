@@ -2,7 +2,7 @@ import "reflect-metadata";
 
 require("dotenv").config();
 
-import { ExpressContext } from "./types/ExpressContext";
+import { ExpressContext } from "./types";
 import { ApolloServer } from "apollo-server-express";
 import Express from "express";
 import { createConnection } from "typeorm";
