@@ -1,6 +1,6 @@
 import { User } from "./User";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
-import { ObjectType, Field, ID } from "type-graphql";
+import { ObjectType, Field, ID, Root } from "type-graphql";
 
 @ObjectType()
 @Entity()
@@ -23,8 +23,15 @@ export class Score extends BaseEntity {
 
   @Field()
   @Column({ default: false })
-  public: boolean;
+  isPrivate: boolean;
+
+  @Column("text")
+  userId: string;
 
   @Field(() => User)
-  user: User;
+  async user(@Root() parent: Score) {
+    return await User.findOne({
+      where: { id: parent.userId },
+    });
+  }
 }

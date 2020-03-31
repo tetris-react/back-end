@@ -13,4 +13,10 @@ export class RegisterInput extends PasswordInput {
   @Field()
   @IsEmail()
   email: string;
+
+  @Field({ nullable: true })
+  tzAbv: string;
+
+  @Field({ nullable: true })
+  tzName: string;
 }

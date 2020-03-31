@@ -1,6 +1,6 @@
-import { ExpressContext } from "./../../types/ExpressContext";
-import { User } from "./../../entity/User";
-import { isAuth } from "./../../middleware/isAuth";
+import { ExpressContext } from "../../types";
+import { User } from "../../entity/User";
+import { isAuth } from "../../middleware/isAuth";
 import { Resolver, UseMiddleware, Query, Ctx } from "type-graphql";
 
 @Resolver()

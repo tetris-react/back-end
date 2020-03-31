@@ -12,7 +12,8 @@
     "server": "ts-node-dev src/index.ts",
     "db:setup": "ts-node ./__test-utils__/setup.ts",
     "test": "yarn db:setup && jest",
-    "coverage": "yarn test --coverage --detectOpenHandles --forceExit || true"
+    "coverage": "yarn test --coverage --detectOpenHandles --forceExit || true",
+    "remake": "psql -U postgres -a -f remakeDatabase.sql"
   },
   "jest": {
     "collectCoverageFrom": [

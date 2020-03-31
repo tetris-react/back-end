@@ -3,8 +3,10 @@
 -- psql -U postgres -a -f remakeDatabase.sql
 
 -- env: DATABASE_URL=postgres://tetris_player:password@localhost:5432/tetris_be
+-- env: TEST_DATABASE_URL=postgres://tetris_player:password@localhost:5432/tetris_test_be
 
 DROP DATABASE IF EXISTS tetris_be;
+DROP DATABASE IF EXISTS tetris_test_be;
 DROP ROLE IF EXISTS tetris_player;
 
 CREATE ROLE tetris_player

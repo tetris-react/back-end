@@ -3,8 +3,7 @@ import { Connection } from "typeorm";
 import { gCall } from "../__test-utils__/gCall";
 import { testConn } from "../__test-utils__/testConn";
 import { User } from "../src/entity/User";
-
-import faker from "faker";
+import { fakeUser } from "../__test-utils__/fakeObjects";
 
 let conn: Connection;
 beforeAll(async () => {
@@ -13,12 +12,6 @@ beforeAll(async () => {
 afterAll(async () => {
   await conn.close();
 });
-
-const fakeUser = {
-  username: faker.internet.userName(),
-  email: faker.internet.email(),
-  password: faker.internet.password(),
-};
 
 const registerMutation = `
   mutation Register($data: RegisterInput!) {

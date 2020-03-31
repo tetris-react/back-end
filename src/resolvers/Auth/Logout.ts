@@ -1,4 +1,4 @@
-import { ExpressContext } from "./../../types/ExpressContext";
+import { ExpressContext } from "../../types";
 import { logger } from "../../middleware";
 import { Resolver, Mutation, UseMiddleware, Ctx } from "type-graphql";
 
