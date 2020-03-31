@@ -11,14 +11,14 @@ afterAll(async () => {
   await conn.close();
 });
 
-const addScoreMutation = `
-  mutation AddScore($data: AddScoreInput!) {
-    addScore(data: $data)
+const addGameRecordMutation = `
+  mutation AddGameRecord($data: AddGameRecordInput!) {
+    addGameRecord(data: $data)
     {
       id
-      value
+      score
       level
-      rowsCleared
+      lines
       isPrivate
     }
   }
@@ -28,22 +28,22 @@ const leaderBoardQuery = `
   query LeaderBoard {
     leaderBoard
     {
-      value
-      rowsCleared
+      score
+      lines
       level
     }
   }
 `;
 
-describe("Current User 👓", () => {
-  it("Gets current user 🍷", async () => {
+describe("Tests score board stuff 🎲", () => {
+  it("Adds game record ⌨️", async () => {
     const response = await gCall({
-      source: addScoreMutation,
+      source: addGameRecordMutation,
       variableValues: {
         data: {
-          value: 28500,
+          score: 28500,
           level: 29,
-          rowsCleared: 175,
+          lines: 175,
           isPrivate: false,
           userId: "1",
         },
@@ -52,9 +52,9 @@ describe("Current User 👓", () => {
 
     expect(response).toMatchObject({
       data: {
-        addScore: {
+        addGameRecord: {
           id: "1",
-          value: 28500,
+          score: 28500,
           level: 29,
           isPrivate: false,
         },
@@ -62,12 +62,12 @@ describe("Current User 👓", () => {
     });
 
     await gCall({
-      source: addScoreMutation,
+      source: addGameRecordMutation,
       variableValues: {
         data: {
-          value: 29000,
+          score: 29000,
           level: 29,
-          rowsCleared: 190,
+          lines: 190,
           isPrivate: true,
           userId: "1",
         },
@@ -75,12 +75,12 @@ describe("Current User 👓", () => {
     });
 
     await gCall({
-      source: addScoreMutation,
+      source: addGameRecordMutation,
       variableValues: {
         data: {
-          value: 27000,
+          score: 27000,
           level: 27,
-          rowsCleared: 170,
+          lines: 170,
           isPrivate: false,
           userId: "1",
         },
@@ -88,7 +88,7 @@ describe("Current User 👓", () => {
     });
   });
 
-  it("Gets current user 🍷", async () => {
+  it("Gets leader board 🌰", async () => {
     const response = await gCall({
       source: leaderBoardQuery,
     });
@@ -97,14 +97,14 @@ describe("Current User 👓", () => {
       data: {
         leaderBoard: [
           {
-            value: 28500,
+            score: 28500,
             level: 29,
-            rowsCleared: 175,
+            lines: 175,
           },
           {
-            value: 27000,
+            score: 27000,
             level: 27,
-            rowsCleared: 170,
+            lines: 170,
           },
         ],
       },

@@ -19,11 +19,11 @@ const currentUserQuery = `
       id
       username
       email
-      scores {
+      records {
         id
-        value
+        score
         level
-        rowsCleared
+        lines
         isPrivate
       }
     }
@@ -45,7 +45,7 @@ describe("Current User 👓", () => {
           id: `${user.id}`,
           username: user.username,
           email: user.email,
-          scores: user.scores(user),
+          records: user.records(user),
         },
       },
     });

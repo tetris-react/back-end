@@ -1,18 +1,18 @@
 import { logger } from "../../middleware";
-import { Score } from "../../entity/Score";
+import { GameRecord } from "../../entity/GameRecord";
 import { Resolver, Query, UseMiddleware } from "type-graphql";
 
 @Resolver()
 export class LoginResolver {
   @UseMiddleware(logger)
-  @Query(() => [Score])
-  async leaderBoard(): Promise<Score[]> {
-    const scores: Score[] = await Score.find({
+  @Query(() => [GameRecord])
+  async leaderBoard(): Promise<GameRecord[]> {
+    const records: GameRecord[] = await GameRecord.find({
       where: { isPrivate: false },
     });
 
-    scores.sort((a, b) => b.value - a.value);
+    records.sort((a, b) => b.score - a.score);
 
-    return scores;
+    return records;
   }
 }

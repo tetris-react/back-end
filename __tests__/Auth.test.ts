@@ -53,6 +53,8 @@ describe("User authentication flow 🌸", () => {
       },
     });
 
+    console.log("REGISTER RESPONSE ***", response);
+
     expect(response).toMatchObject({
       data: {
         register: {

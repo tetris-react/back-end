@@ -1,4 +1,4 @@
-import { Score } from "./Score";
+import { GameRecord } from "./GameRecord";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 import { ObjectType, Field, ID, Root } from "type-graphql";
 
@@ -17,13 +17,13 @@ export class User extends BaseEntity {
   @Column("text", { unique: true })
   username: string;
 
-  @Field(() => [Score])
-  async scores(@Root() parent: User): Promise<Array<Score>> {
-    const scores = await Score.find({
+  @Field(() => [GameRecord])
+  async records(@Root() parent: User): Promise<GameRecord[]> {
+    const records = await GameRecord.find({
       where: { userId: parent.id },
     });
 
-    return scores.sort((a, b) => b.value - a.value);
+    return records.sort((a, b) => b.score - a.score);
   }
 
   @Field()
@@ -40,7 +40,7 @@ export class User extends BaseEntity {
 
   @Field()
   @Column({ default: false })
-  admin: boolean;
+  isAdmin: boolean;
 
   @Column()
   password: string;
