@@ -43,7 +43,7 @@ const sessionOptions = {
     // httpOnly: true,
     // secure: process.env.NODE_ENV === "production",
     sameSite: false,
-    secure: true,
+    secure: false,
     maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
   },
 };
