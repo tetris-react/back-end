@@ -23,6 +23,7 @@ You need to add a `.env` file with:
 
 ```
 DATABASE_URL=postgres://tetris_player:password@localhost:5432/tetris_be
+HEROKU_POSTGRESQL_MAUVE_URL=postgres://tetris_player:password@localhost:5432/tetris_test_be
 SECRET=lksdhglef23092382efhsdof9p8whedfauiwhdgi02088234t9w3efhsx
 REDIS_URL=6379
 PORT=4000
