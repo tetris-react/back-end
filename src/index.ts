@@ -40,7 +40,7 @@ interface Options {
   cookie: {
     httpOnly: boolean;
     sameSite: boolean | "none" | "lax" | "strict" | undefined;
-    secure: boolean;
+    secure: boolean | "auto";
     maxAge: number;
   };
 }
@@ -55,7 +55,8 @@ const sessionOptions: Options = {
   saveUninitialized: false,
   cookie: {
     httpOnly: process.env.NODE_ENV === "development",
-    secure: process.env.NODE_ENV === "production",
+    // secure: process.env.NODE_ENV === "production",
+    secure: "auto",
     sameSite: "none",
     maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
   },
