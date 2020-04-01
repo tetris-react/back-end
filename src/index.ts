@@ -37,12 +37,12 @@ interface Options {
   secret: string;
   resave: boolean;
   saveUninitialized: boolean;
-  cookie: {
-    httpOnly: boolean;
-    sameSite: boolean | "none" | "lax" | "strict" | undefined;
-    secure: boolean | "auto";
-    maxAge: number;
-  };
+  // cookie: {
+  //   httpOnly: boolean;
+  //   sameSite: boolean | "none" | "lax" | "strict" | undefined;
+  //   secure: boolean | "auto";
+  //   maxAge: number;
+  // };
 }
 
 const sessionOptions: Options = {
@@ -53,13 +53,13 @@ const sessionOptions: Options = {
   secret: String(process.env.SECRET),
   resave: false,
   saveUninitialized: false,
-  cookie: {
-    httpOnly: process.env.NODE_ENV === "development",
-    // secure: process.env.NODE_ENV === "production",
-    secure: "auto",
-    sameSite: "none",
-    maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
-  },
+  // cookie: {
+  //   httpOnly: process.env.NODE_ENV === "development",
+  //   // secure: process.env.NODE_ENV === "production",
+  //   secure: "auto",
+  //   sameSite: "none",
+  //   maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
+  // },
 };
 
 const message = `Server running on http://localhost:${process.env.PORT}/graphql 🚀`;
