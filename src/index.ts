@@ -38,8 +38,8 @@ interface Options {
   resave: boolean;
   saveUninitialized: boolean;
   cookie: {
-    // httpOnly: boolean;
-    // sameSite: boolean | "none" | "lax" | "strict" | undefined;
+    httpOnly: boolean;
+    sameSite: boolean | "none" | "lax" | "strict" | undefined;
     secure: boolean;
     maxAge: number;
   };
@@ -54,10 +54,9 @@ const sessionOptions: Options = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    // httpOnly: process.env.NODE_ENV === "development",
-    // secure: process.env.NODE_ENV === "production",
-    secure: true,
-    // sameSite: "none",
+    httpOnly: process.env.NODE_ENV === "development",
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
     maxAge: 1000 * 60 * 60 * 24 * 7 * 365, // 7 years
   },
 };
