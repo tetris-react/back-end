@@ -5,6 +5,7 @@ package-lock.json
 
 # hidden stuff
 .env
+dumb.rdb
 
 # testing stuff
 /coverage
