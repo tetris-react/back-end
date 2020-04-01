@@ -31,7 +31,20 @@ const ormConnection = async () => {
   });
 };
 
-const sessionOptions = {
+interface Options {
+  store: connectRedis.RedisStore;
+  name: string;
+  secret: string;
+  resave: boolean;
+  saveUninitialized: boolean;
+  cookie: {
+    sameSite: boolean | "none" | "lax" | "strict" | undefined;
+    secure: boolean;
+    maxAge: number;
+  };
+}
+
+const sessionOptions: Options = {
   store: new RedisStore({
     client: redis as any,
   }),
