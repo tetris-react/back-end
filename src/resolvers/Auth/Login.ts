@@ -28,6 +28,7 @@ export class LoginResolver {
     }
 
     ctx.req.session!.userId = user.id;
+    ctx.req.session!.isAdmin = user.isAdmin;
 
     return user;
   }

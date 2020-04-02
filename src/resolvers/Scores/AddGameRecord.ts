@@ -1,12 +1,13 @@
-import { logger } from "../../middleware";
+import { ExpressContext } from "./../../types/index";
+import { logger, isAuth } from "../../middleware";
 import { GameRecord } from "../../entity/GameRecord";
 import { User } from "../../entity/User";
 import { AddGameRecordInput } from "../../inputs/AddGameRecordInput";
-import { Resolver, Mutation, Arg, UseMiddleware } from "type-graphql";
+import { Resolver, Mutation, Arg, UseMiddleware, Ctx } from "type-graphql";
 
 @Resolver()
 export class AddGameRecordResolver {
-  @UseMiddleware(logger)
+  @UseMiddleware(logger, isAuth)
   @Mutation(() => GameRecord, { nullable: true })
   async addGameRecord(
     @Arg("data")
@@ -15,7 +16,6 @@ export class AddGameRecordResolver {
       level,
       lines,
       isPrivate,
-      userId,
       numTetris,
       tetrisRate,
       attackPerSecond,
@@ -23,10 +23,11 @@ export class AddGameRecordResolver {
       processedPerSecond,
       processedPerMinute,
       date,
-    }: AddGameRecordInput
+    }: AddGameRecordInput,
+    @Ctx() ctx: ExpressContext
   ): Promise<any> {
     const user = await User.findOne({
-      where: { id: userId },
+      where: { id: ctx.req.session!.userId },
     });
 
     const record = await GameRecord.create({
@@ -34,7 +35,7 @@ export class AddGameRecordResolver {
       level,
       lines,
       isPrivate,
-      userId,
+      userId: ctx.req.session!.userId,
       numTetris,
       tetrisRate,
       attackPerSecond,

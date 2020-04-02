@@ -9,8 +9,8 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field()
-  @Column("text", { unique: true })
+  @Field({ nullable: true })
+  @Column("text", { nullable: true })
   email: string;
 
   @Field()
@@ -37,6 +37,10 @@ export class User extends BaseEntity {
   @Field()
   @Column("text", { default: "UTC" })
   tzAbv: string;
+
+  @Field()
+  @Column({ default: false })
+  isPrivate: boolean;
 
   @Field()
   @Column({ default: false })
