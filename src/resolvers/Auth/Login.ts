@@ -42,7 +42,7 @@ export class LoginResolver {
 
     return {
       message: "Successfully logged in. 🔥",
-      status: false,
+      status: true,
       user: user,
     };
   }
