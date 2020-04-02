@@ -9,8 +9,8 @@ export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field({ nullable: true })
-  @Column("text", { nullable: true })
+  @Field()
+  @Column("text", { unique: true })
   email: string;
 
   @Field()

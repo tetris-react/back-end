@@ -1,4 +1,7 @@
-import { isAuth } from "./../../middleware/isAuth";
+import { ChangePasswordInput } from "./../../inputs/ChangePasswordInput";
+import { redis } from "./../../redis";
+import { forgotPasswordPrefix } from "./../../nodemailer/prefixes";
+import { logger } from "./../../middleware/logger";
 import { ExpressContext, ApiResponse } from "./../../types/index";
 import bcrypt from "bcryptjs";
 import { User } from "./../../entity/User";
@@ -6,14 +9,16 @@ import { Resolver, Mutation, Arg, Ctx, UseMiddleware } from "type-graphql";
 
 @Resolver()
 export class ChangePasswordResolver {
-  @UseMiddleware(isAuth)
+  @UseMiddleware(logger)
   @Mutation(() => ApiResponse, { nullable: true })
   async changePassword(
-    @Arg("password")
-    password: string,
+    @Arg("data")
+    { token, password }: ChangePasswordInput,
     @Ctx() ctx: ExpressContext
   ): Promise<ApiResponse> {
-    const user = await User.findOne(ctx.req.session!.userId);
+    const userId = await redis.get(forgotPasswordPrefix + token);
+
+    const user = await User.findOne({ where: { id: userId } });
 
     if (!user) {
       return {
@@ -30,7 +35,13 @@ export class ChangePasswordResolver {
     } else {
       user.password = await bcrypt.hash(password, 12);
 
+      await redis.del(forgotPasswordPrefix + token);
+
       await user.save();
+
+      ctx.req.session!.userId = user.id;
+      ctx.req.session!.email = user.email;
+      ctx.req.session!.isAdmin = user.isAdmin;
 
       return {
         message: "Password successfully changed! 🔥",

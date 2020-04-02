@@ -1,3 +1,4 @@
+import { AuthResponse } from "./../../types/index";
 import { logger } from "../../middleware";
 import bcrypt from "bcryptjs";
 import { ExpressContext } from "../../types";
@@ -8,28 +9,41 @@ import { Resolver, Mutation, Arg, Ctx, UseMiddleware } from "type-graphql";
 @Resolver()
 export class LoginResolver {
   @UseMiddleware(logger)
-  @Mutation(() => User, { nullable: true })
+  @Mutation(() => AuthResponse)
   async login(
     @Arg("data") { username, password }: LoginInput,
     @Ctx() ctx: ExpressContext
-  ): Promise<User | string> {
+  ): Promise<AuthResponse> {
     const user = await User.findOne({
       where: { username },
     });
 
     if (!user) {
-      return "User not found. 🤷‍♂";
+      return {
+        message: "Username not found. 🤷‍♂",
+        status: false,
+        user: null,
+      };
     }
 
     const valid = await bcrypt.compare(password, user.password);
 
     if (!valid) {
-      return "Password is not valid. 💀";
+      return {
+        message: "Password is not valid. 💀",
+        status: false,
+        user: null,
+      };
     }
 
     ctx.req.session!.userId = user.id;
+    ctx.req.session!.email = user.email;
     ctx.req.session!.isAdmin = user.isAdmin;
 
-    return user;
+    return {
+      message: "Successfully logged in. 🔥",
+      status: false,
+      user: user,
+    };
   }
 }

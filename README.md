@@ -72,14 +72,30 @@ mutation Register {
   register(
     data: {
       email: "RickyBobby@gmail.com"
-      username: "RickyBobby" # Nullable
-      password: "password" 
+      username: "RickyBobby"
+      password: "password"
       country: "USA" # Nullable, Default: USA
       tzAbv: "CST" # Nullable, Default: UTC
       tzName: "America/Chicago" # Nullable, Default: UTC
       isPrivate: false # Nullable, Default: false
     }
   ) {
+    id
+    username
+    email
+    country
+    tzAbv
+    tzName
+    isPrivate
+  }
+}
+
+# Login returns success status, message and a user object
+mutation Login {
+  login(data: { username: "RickyBobby", password: "password" }) {
+    message
+    status
+    user {
       id
       username
       email
@@ -88,16 +104,6 @@ mutation Register {
       tzName
       isPrivate
     }
-}
-
-mutation Login {
-  login(data: { username: "RickyBobby", password: "password" }) {
-    id
-    username
-    email
-    country
-    tzAbv
-    tzName
   }
 }
 
@@ -136,7 +142,7 @@ mutation AddGameRecord {
       score: number
       level: number
       lines: number
-      # Set isPrivate to user's isPrivate status 
+      # Set isPrivate to user's isPrivate status
       # isPrivate: boolean # Nullable, Default: false
       numTetris: number # Nullable, Default: 0
       tetrisRate: number # Nullable, Default: 0
@@ -201,7 +207,7 @@ query LeaderBoard {
 
 #### User Settings Mutations
 
-> Each settings query returns a response with 
+> Each settings query returns a response with
 
 ```graphql
 # passwords must be 6 characters long or longer
@@ -234,10 +240,27 @@ mutation ChangeCountry {
 }
 
 mutation ChangeTimezone {
-  changeTimezone(data: {
-    tzName: "America/New_York"
-    tzAbv: "EST"
-  }) {
+  changeTimezone(data: { tzName: "America/New_York", tzAbv: "EST" }) {
+    message
+    status
+  }
+}
+```
+
+#### Forgot Password
+
+```graphql
+mutation ForgotPassword {
+  forgotPassword(email: "RickyBobby@gmail.com")
+}
+
+mutation ChangePassword {
+  changePassword(
+    data: {
+      token: "65765433-7d36-44a1-b401-7e36e064c310"
+      password: "newPassword"
+    }
+  ) {
     message
     status
   }

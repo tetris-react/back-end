@@ -1,7 +1,8 @@
 import { PasswordInput } from "./PasswordInput";
-import { Length } from "class-validator";
+import { Length, IsEmail } from "class-validator";
 import { Field, InputType } from "type-graphql";
 import { DoesUsernameAlreadyExist } from "./validators/doesUsernameExist";
+import { DoesEmailAlreadyExist } from "./validators/doesEmailExist";
 
 @InputType()
 export class RegisterInput extends PasswordInput {
@@ -10,8 +11,9 @@ export class RegisterInput extends PasswordInput {
   @DoesUsernameAlreadyExist({ message: "Username already in use, dude! 💩" })
   username: string;
 
-  @Field({ nullable: true })
-  // @IsEmail()
+  @Field()
+  @IsEmail()
+  @DoesEmailAlreadyExist({ message: "Email already in use, dude! 💩" })
   email: string;
 
   @Field({ nullable: true })

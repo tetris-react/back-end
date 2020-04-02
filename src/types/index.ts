@@ -1,3 +1,4 @@
+import { User } from "./../entity/User";
 import { Request, Response } from "express";
 import { ObjectType, Field } from "type-graphql";
 
@@ -13,4 +14,10 @@ export class ApiResponse {
 
   @Field()
   status: boolean;
+}
+
+@ObjectType()
+export class AuthResponse extends ApiResponse {
+  @Field(() => User, { nullable: true })
+  user: User | null;
 }
