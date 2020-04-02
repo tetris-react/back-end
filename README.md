@@ -151,6 +151,7 @@ mutation AddGameRecord {
       processedPerSecond: number # Nullable, Default: 0
       processedPerMinute: number # Nullable, Default: 0
       # date: is auto-generated as a now datetime stamp
+      # userId: is automatically added from current session
     }
   ) {
     id
@@ -212,7 +213,7 @@ query LeaderBoard {
 ```graphql
 # passwords must be 6 characters long or longer
 mutation ChangePassword {
-  changePassword(password: "drowssap") {
+  changePassword(password: "newPassword") {
     message
     status
   }
@@ -254,11 +255,11 @@ mutation ForgotPassword {
   forgotPassword(email: "RickyBobby@gmail.com")
 }
 
-mutation ChangePassword {
-  changePassword(
+mutation ChangeForgottenPassword {
+  changeForgottenPassword(
     data: {
       token: "65765433-7d36-44a1-b401-7e36e064c310"
-      password: "newPassword"
+      password: "newestPassword"
     }
   ) {
     message

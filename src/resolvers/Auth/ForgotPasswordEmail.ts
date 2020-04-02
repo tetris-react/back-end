@@ -1,9 +1,9 @@
-import { User } from "./../../entity/User";
-import { forgotPasswordPrefix } from "./../../nodemailer/prefixes";
-import { redis } from "./../../redis";
+import { User } from "../../entity/User";
+import { forgotPasswordPrefix } from "../../nodemailer/prefixes";
+import { redis } from "../../redis";
 import { Resolver, Mutation, Arg } from "type-graphql";
 import { v4 } from "uuid";
-import { sendEmail } from "./../../nodemailer/sendEmail";
+import { sendEmail } from "../../nodemailer/sendEmail";
 
 require("dotenv").config();
 
