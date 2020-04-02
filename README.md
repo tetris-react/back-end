@@ -28,6 +28,9 @@ SECRET=lksdhglef23092382efhsdof9p8whedfauiwhdgi02088234t9w3efhsx
 REDIS_URL=6379
 PORT=4000
 CORS_ORIGIN=http://localhost:3000
+NODE_ENV=development
+EMAIL_PASSWORD=*y2te^c7sb(*&3noU(W
+FRONT_END_URL=http://localhost:3000/
 ```
 
 > **Note:** Production env variables will vary. This is just the values you need to get this working locally.
