@@ -34,7 +34,4 @@ export class AddGameRecordInput {
 
   @Field({ nullable: true })
   isPrivate: boolean;
-
-  @Field()
-  userId: string;
 }

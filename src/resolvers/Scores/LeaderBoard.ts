@@ -1,10 +1,10 @@
-import { logger } from "../../middleware";
+import { logger, isAuth } from "../../middleware";
 import { GameRecord } from "../../entity/GameRecord";
 import { Resolver, Query, UseMiddleware } from "type-graphql";
 
 @Resolver()
 export class LoginResolver {
-  @UseMiddleware(logger)
+  @UseMiddleware(logger, isAuth)
   @Query(() => [GameRecord])
   async leaderBoard(): Promise<GameRecord[]> {
     const records: GameRecord[] = await GameRecord.find({

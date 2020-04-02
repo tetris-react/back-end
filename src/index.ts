@@ -73,10 +73,7 @@ const main = async () => {
   apolloServer.applyMiddleware({ app, cors: false });
 
   app.listen(process.env.PORT, () => {
-    setTimeout(
-      () => console.log(message, `NODE ENV: ${process.env.NODE_ENV} 🛠`),
-      500
-    );
+    setTimeout(() => console.log(message), 750);
   });
 };
 
