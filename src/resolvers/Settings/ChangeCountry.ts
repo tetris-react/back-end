@@ -1,15 +1,15 @@
-import { isAuth } from "./../../middleware/isAuth";
-import { ExpressContext, ApiResponse } from "./../../types/index";
-import { User } from "./../../entity/User";
+import { isAuth } from "../../middleware/isAuth";
+import { ExpressContext, ApiResponse } from "../../types/index";
+import { User } from "../../entity/User";
 import { Resolver, Mutation, Arg, Ctx, UseMiddleware } from "type-graphql";
 
 @Resolver()
-export class ChangeEmailResolver {
+export class ChangeCountryResolver {
   @UseMiddleware(isAuth)
   @Mutation(() => ApiResponse, { nullable: true })
-  async changeEmail(
-    @Arg("email")
-    email: string,
+  async changeCountry(
+    @Arg("country")
+    country: string,
     @Ctx() ctx: ExpressContext
   ): Promise<ApiResponse> {
     const user = await User.findOne(ctx.req.session!.userId);
@@ -21,12 +21,12 @@ export class ChangeEmailResolver {
       };
     }
 
-    user.email = email;
+    user.country = country;
 
     await user.save();
 
     return {
-      message: `Email successfully changed to ${email}! 🔥`,
+      message: `Country successfully changed to ${country}! 🔥`,
       status: true,
     };
   }

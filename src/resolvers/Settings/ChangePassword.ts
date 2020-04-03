@@ -1,7 +1,7 @@
-import { isAuth } from "./../../middleware/isAuth";
-import { ExpressContext, ApiResponse } from "./../../types/index";
+import { isAuth } from "../../middleware/isAuth";
+import { ExpressContext, ApiResponse } from "../../types/index";
 import bcrypt from "bcryptjs";
-import { User } from "./../../entity/User";
+import { User } from "../../entity/User";
 import { Resolver, Mutation, Arg, Ctx, UseMiddleware } from "type-graphql";
 
 @Resolver()

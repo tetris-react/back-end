@@ -1,15 +1,16 @@
-import { isAuth } from "./../../middleware/isAuth";
-import { ExpressContext, ApiResponse } from "./../../types/index";
-import { User } from "./../../entity/User";
+import { TimezoneInput } from "../../inputs/TimezoneInput";
+import { isAuth } from "../../middleware/isAuth";
+import { ExpressContext, ApiResponse } from "../../types/index";
+import { User } from "../../entity/User";
 import { Resolver, Mutation, Arg, Ctx, UseMiddleware } from "type-graphql";
 
 @Resolver()
-export class ChangeUsernameResolver {
+export class ChangeTimezoneResolver {
   @UseMiddleware(isAuth)
   @Mutation(() => ApiResponse, { nullable: true })
-  async changeUsername(
-    @Arg("username")
-    username: string,
+  async changeTimezone(
+    @Arg("data")
+    { tzName, tzAbv }: TimezoneInput,
     @Ctx() ctx: ExpressContext
   ): Promise<ApiResponse> {
     const user = await User.findOne(ctx.req.session!.userId);
@@ -21,12 +22,13 @@ export class ChangeUsernameResolver {
       };
     }
 
-    user.username = username;
+    user.tzName = tzName;
+    user.tzAbv = tzAbv;
 
     await user.save();
 
     return {
-      message: `Username successfully changed to ${username}! 🔥`,
+      message: `Timezone successfully changed to ${tzName} (${tzAbv})! 🔥`,
       status: true,
     };
   }

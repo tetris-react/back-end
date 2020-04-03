@@ -11,7 +11,7 @@ export class RegisterInput extends PasswordInput {
   @DoesUsernameAlreadyExist({ message: "Username already in use, dude! 💩" })
   username: string;
 
-  @Field()
+  @Field({ nullable: true })
   @IsEmail()
   @DoesEmailAlreadyExist({ message: "Email already in use, dude! 💩" })
   email: string;
