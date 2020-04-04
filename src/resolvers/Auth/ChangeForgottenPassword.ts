@@ -22,7 +22,7 @@ export class ChangeForgottenPasswordResolver {
 
     if (!user) {
       return {
-        message: "Could not find user. 🤷‍♂",
+        message: "Token has expired. 💀",
         status: false,
       };
     }
