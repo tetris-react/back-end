@@ -23,32 +23,36 @@ export class GameRecord extends BaseEntity {
   lines: number;
 
   @Field()
-  @Column("int", { default: 0 })
+  @Column("decimal", { default: 0 })
   numTetris: number;
 
   @Field()
-  @Column("int", { default: 0 })
+  @Column("decimal", { default: 0 })
   tetrisRate: number;
 
   @Field()
-  @Column("int", { default: 0 })
+  @Column("decimal", { default: 0 })
   attackPerSecond: number;
 
   @Field()
-  @Column("int", { default: 0 })
+  @Column("decimal", { default: 0 })
   attackPerMinute: number;
 
   @Field()
-  @Column("int", { default: 0 })
+  @Column("decimal", { default: 0 })
   processedPerSecond: number;
 
   @Field()
-  @Column("int", { default: 0 })
+  @Column("decimal", { default: 0 })
   processedPerMinute: number;
 
   @Field()
-  @Column("timestamp", { default: `${moment().format()}` })
-  date: string;
+  @Column("int", { default: 0 })
+  time: number;
+
+  @Field()
+  @Column("timestamp", { default: moment().format() })
+  date: number;
 
   @Field()
   @Column({ default: false })

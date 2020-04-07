@@ -1,4 +1,4 @@
-import { User } from "./../entity/User";
+import { User } from "../entity/User";
 import { Request, Response } from "express";
 import { ObjectType, Field } from "type-graphql";
 import { Stream } from "stream";

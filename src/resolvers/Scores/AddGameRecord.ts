@@ -42,7 +42,7 @@ export class AddGameRecordResolver {
       attackPerMinute,
       processedPerSecond,
       processedPerMinute,
-      date,
+      date: Number(date),
     }).save();
 
     const finalRecord = {

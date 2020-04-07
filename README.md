@@ -222,8 +222,8 @@ mutation ChangePassword {
   }
 }
 
-mutation ChangeUsername {
-  changeUsername(username: "BobbyRicky") {
+mutation ChangeUser {
+  changeUser(username: "BobbyRicky") {
     message
     status
   }
