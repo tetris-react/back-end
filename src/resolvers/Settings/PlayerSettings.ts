@@ -1,4 +1,4 @@
-import { TimezoneInput } from "./../../inputs/TimezoneInput";
+import { TimezoneInput } from "../../inputs/TimezoneInput";
 import { isAuth } from "../../middleware/isAuth";
 import { ExpressContext, ApiResponse } from "../../types/index";
 import { User } from "../../entity/User";

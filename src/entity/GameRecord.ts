@@ -1,7 +1,6 @@
 import { User } from './User';
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
 import { ObjectType, Field, ID, Root } from 'type-graphql';
-import moment from 'moment';
 
 @ObjectType()
 @Entity()

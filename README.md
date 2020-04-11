@@ -15,13 +15,13 @@
 - Apollo Server Express
 - Bcrypt
 
-## Local Startup Guide:
+## Local Startup Guide
 
-### Step 1:
+### Step 1
 
 You need to add a `.env` file with:
 
-```
+```bash
 DATABASE_URL=postgres://tetris_player:password@localhost:5432/tetris_be
 HEROKU_POSTGRESQL_MAUVE_URL=postgres://tetris_player:password@localhost:5432/tetris_test_be
 SECRET=lksdhglef23092382efhsdof9p8whedfauiwhdgi02088234t9w3efhsx
@@ -35,7 +35,7 @@ FRONT_END_URL=http://localhost:3000/
 
 > **Note:** Production env variables will vary. This is just the values you need to get this working locally.
 
-### Step 2:
+### Step 2
 
 Install Redis:
 
@@ -43,7 +43,7 @@ Use the following commands to install the last version of the Redis cli:
 
 > Do this in a new terminal from your home directory.
 
-```
+```bash
 wget http://download.redis.io/redis-stable.tar.gz
 
 tar xvzf redis-stable.tar.gz
@@ -55,7 +55,7 @@ make
 
 > What is Redis? TLDR: Is a local storage that holds cookies instead of tokens and hold them on the back end instead of on the browser. At least in terms of this project. [Read the docs here!](https://redis.io/topics/quickstart)
 
-### Step 3:
+### Step 3
 
 Yarn or npm install.
 
@@ -63,11 +63,11 @@ Then cd into the `src/` directory and run `redis-server`.
 
 Once Redis server is running, open your repo directory in another terminal and run `yarn server`.
 
-If everything was done correctly then your server should be successfully running on http://localhost:4000/graphql! Go to server url in browser and you should GraphQL Playground. Check out the docs tab and register your first user!
+If everything was done correctly then your server should be successfully running on <http://localhost:4000/graphql!> Go to server url in browser and you should GraphQL Playground. Check out the docs tab and register your first user!
 
-## Query examples:
+## Query examples
 
-#### User Authentication:
+### User Authentication
 
 ```graphql
 # A user is logged in upon registration
@@ -135,7 +135,7 @@ mutation Logout {
 }
 ```
 
-#### Score Board:
+### Score Board
 
 ```graphql
 # Adds a new game record to current user thats logged in.
@@ -153,6 +153,7 @@ mutation AddGameRecord {
       attackPerMinute: number # Nullable, Default: 0
       processedPerSecond: number # Nullable, Default: 0
       processedPerMinute: number # Nullable, Default: 0
+      time: number # Nullable, Default: 0
       # date: is auto-generated as a now datetime stamp
       # userId: is automatically added from current session
     }
@@ -209,7 +210,7 @@ query LeaderBoard {
 }
 ```
 
-#### User Settings Mutations
+### User Settings Mutations
 
 > Each settings query returns a response with
 
@@ -222,8 +223,8 @@ mutation ChangePassword {
   }
 }
 
-mutation ChangeUsername {
-  changeUsername(username: "BobbyRicky") {
+mutation ChangeUser {
+  changeUser(username: "BobbyRicky") {
     message
     status
   }
@@ -251,7 +252,7 @@ mutation ChangeTimezone {
 }
 ```
 
-#### Forgot Password
+### Forgot Password
 
 ```graphql
 mutation ForgotPassword {

@@ -1,9 +1,11 @@
-import { MinLength } from "class-validator";
 import { Field, InputType } from "type-graphql";
+import { PasswordLength } from "./validators/passwordValidation";
 
 @InputType()
 export class PasswordInput {
   @Field()
-  @MinLength(6)
+  @PasswordLength({
+    message: "Passwords must be at least 6 character long, bruh. 💪",
+  })
   password: string;
 }

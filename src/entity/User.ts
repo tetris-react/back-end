@@ -1,7 +1,6 @@
 import { GameRecord } from "./GameRecord";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 import { ObjectType, Field, ID, Root } from "type-graphql";
-import { v4 } from "uuid";
 
 @ObjectType()
 @Entity()
@@ -11,7 +10,7 @@ export class User extends BaseEntity {
   id: number;
 
   @Field()
-  @Column("text", { unique: true, default: `${v4()}@tetrix.now.sh` })
+  @Column("text", { unique: true })
   email: string;
 
   @Field()
