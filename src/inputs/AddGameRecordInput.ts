@@ -1,21 +1,25 @@
-import { Field, InputType } from "type-graphql";
+import { Field, InputType } from 'type-graphql';
 
 @InputType()
 export class AddGameRecordInput {
-  @Field()
-  score: number;
+  @Field() score: number;
 
-  @Field()
-  level: number;
+  @Field() level: number;
 
-  @Field()
-  lines: number;
+  @Field() lines: number;
+
+  @Field() time: number;
+
+  @Field() date: string;
+
+  @Field() tzName: string;
+
+  @Field() tzAbv: string;
+
+  @Field() tetrisRate: number;
 
   @Field({ nullable: true })
   numTetris: number;
-
-  @Field({ nullable: true })
-  tetrisRate: number;
 
   @Field({ nullable: true })
   attackPerSecond: number;
@@ -28,9 +32,6 @@ export class AddGameRecordInput {
 
   @Field({ nullable: true })
   processedPerMinute: number;
-
-  @Field({ nullable: true })
-  date: string;
 
   @Field({ nullable: true })
   isPrivate: boolean;
